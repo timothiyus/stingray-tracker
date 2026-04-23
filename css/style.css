@@ -989,7 +989,7 @@ a {
   }
 
   .header {
-    padding: 1rem 0;
+    padding: 0.75rem 0;
   }
 
   .header__content {
@@ -998,18 +998,21 @@ a {
 
   .header__emoji {
     font-size: 1.5rem;
+    flex-shrink: 0;
   }
 
   .header__brand h1 {
     font-size: 1rem;
+    margin: 0;
   }
 
   .header__brand p {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
+    margin-top: 0.125rem;
   }
 
   .tabs {
-    top: 50px;
+    top: 45px;
   }
 
   .tabs__btn {
@@ -1052,10 +1055,14 @@ a {
     padding: 0.75rem;
     margin-bottom: 1.5rem;
     gap: 0.25rem;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
   }
 
   .journey__stage {
-    min-width: 50px;
+    min-width: 70px;
     flex: 0 0 auto;
   }
 
@@ -1069,10 +1076,22 @@ a {
   }
 
   .progress-section__value {
-    font-size: 1.5rem;
+    font-size: 1.375rem;
   }
 
   .progress-section__label {
+    font-size: 0.7rem;
+  }
+
+  .progress-section__header {
+    gap: 1rem;
+  }
+
+  .progress-bar {
+    height: 1.25rem;
+  }
+
+  .progress-bar__text {
     font-size: 0.75rem;
   }
 
@@ -1167,21 +1186,42 @@ a {
 
   .transaction {
     padding: 0.75rem;
+    flex-direction: column;
+    align-items: flex-start;
     gap: 0.5rem;
+  }
+
+  .transaction__info {
+    width: 100%;
   }
 
   .transaction__amount {
     font-size: 1rem;
-    margin-right: 0.5rem;
+    margin-right: 0;
   }
 
   .transaction__note {
-    margin-right: 0.5rem;
-    font-size: 0.8rem;
+    margin-right: 0;
+    font-size: 0.75rem;
+  }
+
+  .transaction__time {
+    font-size: 0.7rem;
+  }
+
+  .transaction__delete {
+    align-self: flex-end;
   }
 
   .subscription-item {
     padding: 0.75rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .subscription-item__info {
+    width: 100%;
   }
 
   .achievement-stats {
