@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stingray Tracker - Save for Your Dream Corvette</title>
+  <meta name="description" content="Track your spending and save for your dream 1960s-70s Corvette Stingray with this gamified savings dashboard." />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <!-- ─── Header ─── -->
+  <header class="header">
+    <div class="container">
+      <div class="header__content">
+        <div class="header__brand">
+          <span class="header__emoji">🏎️</span>
+          <div>
+            <h1>Stingray Tracker</h1>
+            <p>Save for your dream Corvette</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ─── Main Navigation ─── -->
+  <nav class="tabs">
+    <div class="container">
+      <div class="tabs__list" id="tabsList">
+        <button class="tabs__btn active" data-tab="today">📅 Today</button>
+        <button class="tabs__btn" data-tab="stats">📊 Stats</button>
+        <button class="tabs__btn" data-tab="subscriptions">🔄 Subscriptions</button>
+        <button class="tabs__btn" data-tab="reports">📈 Reports</button>
+        <button class="tabs__btn" data-tab="achievements">🏆 Achievements</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ─── Main Content ─── -->
+  <main class="main">
+    <div class="container">
+
+      <!-- ─── Hero Section ─── -->
+      <section class="hero-card" id="heroSection">
+        <h2>Your Stingray Journey</h2>
+        <p class="hero-card__subtitle">Watch your dream get closer with every dollar saved</p>
+
+        <div class="journey">
+          <div class="journey__stage" data-stage="0">
+            <span class="journey__emoji">🔒</span>
+            <p>Start</p>
+          </div>
+          <div class="journey__stage" data-stage="5000">
+            <span class="journey__emoji">🚗</span>
+            <p>$5K</p>
+          </div>
+          <div class="journey__stage" data-stage="10000">
+            <span class="journey__emoji">🏎️</span>
+            <p>$10K</p>
+          </div>
+          <div class="journey__stage" data-stage="15000">
+            <span class="journey__emoji">⚡</span>
+            <p>$15K</p>
+          </div>
+          <div class="journey__stage" data-stage="20000">
+            <span class="journey__emoji">🏆</span>
+            <p>$20K</p>
+          </div>
+        </div>
+
+        <div class="progress-section">
+          <div class="progress-section__header">
+            <div>
+              <p class="progress-section__label">Total Saved</p>
+              <p class="progress-section__value" id="totalSaved">$0</p>
+            </div>
+            <div>
+              <p class="progress-section__label">Goal</p>
+              <p class="progress-section__value">$20,000</p>
+            </div>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-bar__fill" id="progressBarFill" style="width: 0%"></div>
+            <span class="progress-bar__text" id="progressPercent">0%</span>
+          </div>
+        </div>
+
+        <div class="milestone-grid">
+          <div class="milestone-card">
+            <span class="milestone-card__emoji" id="currentEmoji">🔒</span>
+            <p class="milestone-card__label">Current Milestone</p>
+            <h3 id="currentMilestone">Start</h3>
+            <p class="milestone-card__desc" id="currentDesc">Begin your journey to save for the Stingray</p>
+          </div>
+          <div class="milestone-card" id="nextMilestoneCard">
+            <span class="milestone-card__emoji" id="nextEmoji">🚗</span>
+            <p class="milestone-card__label">Next Milestone</p>
+            <h3 id="nextMilestone">$5,000</h3>
+            <p class="milestone-card__desc" id="nextAmount">$5,000 to go!</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ─── Tab Content ─── -->
+      <div class="tabs__content">
+
+        <!-- TODAY TAB -->
+        <section id="tab-today" class="tab-pane active">
+          <!-- XP CARD -->
+          <div class="card xp-card">
+            <div class="xp-header">
+              <div>
+                <p class="xp-label">Level <span id="currentLevel">1</span></p>
+                <p class="xp-text" id="nextXPLevel">1,000 XP to next level</p>
+              </div>
+              <p class="xp-total" id="totalXP">0 XP</p>
+            </div>
+            <div class="xp-bar">
+              <div class="xp-bar__fill" id="xpBarFill" style="width: 0%"></div>
+              <span class="xp-bar__text" id="xpPercent">0%</span>
+            </div>
+          </div>
+
+          <div class="card" id="dailySummaryCard">
+            <h2>Today's Summary</h2>
+
+            <div class="status-banner" id="statusBanner">
+              <p class="status-banner__title" id="statusTitle">✅ You're on track!</p>
+              <p class="status-banner__text" id="statusText">Amazing! Stay focused and you'll crush today's goal.</p>
+            </div>
+
+            <div class="stats-grid">
+              <div class="stat-box">
+                <p class="stat-box__label">Daily Allowance</p>
+                <p class="stat-box__value" id="dailyAllowance">$0.00</p>
+              </div>
+              <div class="stat-box">
+                <p class="stat-box__label">Spent Today</p>
+                <p class="stat-box__value" id="spentToday">$0.00</p>
+              </div>
+              <div class="stat-box">
+                <p class="stat-box__label">Remaining</p>
+                <p class="stat-box__value" id="remaining">$0.00</p>
+              </div>
+              <div class="stat-box">
+                <p class="stat-box__label">Progress</p>
+                <p class="stat-box__value" id="dailyProgress">0%</p>
+              </div>
+            </div>
+
+            <div class="progress-bar progress-bar--large">
+              <div class="progress-bar__fill" id="dailyBarFill" style="width: 0%"></div>
+            </div>
+
+            <div class="tip-box">
+              <p>💡 <strong>Daily Tip:</strong> Every dollar saved is one step closer to your Stingray. <span id="warningText"></span></p>
+            </div>
+          </div>
+
+          <div class="card">
+            <h2>Daily Spending Log</h2>
+            <div class="spending-buttons">
+              <button class="btn btn--warning" id="toggleFormBtn">➕ Add Spending</button>
+              <button class="btn btn--secondary" id="toggleAvoidedBtn">✨ Log Avoided Purchase</button>
+              <button class="btn btn--success" id="toggleExtraSavingsBtn">💰 Extra Savings</button>
+              <button class="btn btn--error" id="toggleWithdrawalBtn">🏦 Withdraw from Savings</button>
+            </div>
+
+            <form id="spendingForm" class="form hidden">
+              <div class="form__row">
+                <div class="form__group">
+                  <label>Amount ($)</label>
+                  <input type="number" id="amount" step="0.01" placeholder="0.00" required />
+                </div>
+                <div class="form__group">
+                  <label>Category</label>
+                  <select id="category" required>
+                    <option>Food</option>
+                    <option>Entertainment</option>
+                    <option>Shopping</option>
+                    <option>Transport</option>
+                    <option>Health</option>
+                    <option>Subscriptions</option>
+                    <option>Other</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form__group">
+                <label>Note (optional)</label>
+                <input type="text" id="note" placeholder="e.g., Coffee at café" />
+              </div>
+              <button type="submit" class="btn btn--warning">Log Spending</button>
+            </form>
+
+            <form id="avoidedForm" class="form hidden">
+              <div class="form__group">
+                <label>What did you avoid buying?</label>
+                <input type="text" id="avoidedItem" placeholder="e.g., Coffee, new game" required />
+              </div>
+              <div class="form__group">
+                <label>Estimated cost ($)</label>
+                <input type="number" id="avoidedCost" step="0.01" placeholder="0.00" required />
+              </div>
+              <button type="submit" class="btn btn--secondary">Log +10 XP</button>
+            </form>
+
+            <form id="extraSavingsForm" class="form hidden">
+              <div class="form__row">
+                <div class="form__group">
+                  <label>Extra Savings - Dollars</label>
+                  <input type="number" id="extraDollars" step="1" placeholder="0" required />
+                </div>
+                <div class="form__group">
+                  <label>Extra Savings - Cents</label>
+                  <input type="number" id="extraCents" step="1" min="0" max="99" placeholder="0" required />
+                </div>
+              </div>
+              <button type="submit" class="btn btn--success">Log Extra Savings</button>
+            </form>
+
+            <form id="withdrawalForm" class="form hidden">
+              <div class="form__group">
+                <label>Withdrawal Amount ($)</label>
+                <input type="number" id="withdrawalAmount" step="0.01" placeholder="0.00" required />
+              </div>
+              <div class="form__group">
+                <label>Reason (optional)</label>
+                <input type="text" id="withdrawalReason" placeholder="e.g., Emergency expense" />
+              </div>
+              <button type="submit" class="btn btn--error">Withdraw from Savings</button>
+            </form>
+
+            <div id="transactionsList" class="transactions">
+              <p class="empty-state">✨ No transactions logged yet</p>
+            </div>
+          </div>
+
+          <!-- WEEKLY TRACKER -->
+          <div class="card">
+            <h2>This Week</h2>
+            <div class="weekly-tracker">
+              <div class="weekly-header">
+                <div>
+                  <p class="stat-box__label">Weekly Allocation</p>
+                  <p class="stat-box__value" id="weeklyAllocation">$0.00</p>
+                </div>
+                <div>
+                  <p class="stat-box__label">Spent This Week</p>
+                  <p class="stat-box__value" id="weeklySpent">$0.00</p>
+                </div>
+                <div>
+                  <p class="stat-box__label">Remaining</p>
+                  <p class="stat-box__value" id="weeklyRemaining">$0.00</p>
+                </div>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-bar__fill" id="weeklyBarFill" style="width: 0%"></div>
+                <span class="progress-bar__text" id="weeklyPercent">0%</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- STATS TAB -->
+        <section id="tab-stats" class="tab-pane">
+          <div class="card">
+            <h2>Streaks</h2>
+            <div class="two-col">
+              <div class="stat-card">
+                <p class="stat-card__label">🔥 Current Streak</p>
+                <p class="stat-card__value" id="currentStreak">0</p>
+                <p class="stat-card__text">Days under budget in a row</p>
+              </div>
+              <div class="stat-card">
+                <p class="stat-card__label">🏅 Longest Streak</p>
+                <p class="stat-card__value" id="longestStreak">0</p>
+                <p class="stat-card__text">Your best consecutive days</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h2>This Week</h2>
+            <div class="stats-grid">
+              <div class="stat-box">
+                <p class="stat-box__label">Days Under Budget</p>
+                <p class="stat-box__value" id="weekUnderBudget">0/7</p>
+              </div>
+              <div class="stat-box">
+                <p class="stat-box__label">Week Spent</p>
+                <p class="stat-box__value" id="weekSpent">$0.00</p>
+              </div>
+              <div class="stat-box">
+                <p class="stat-box__label">Daily Avg</p>
+                <p class="stat-box__value" id="weekAvg">$0.00</p>
+              </div>
+              <div class="stat-box">
+                <p class="stat-box__label">Status</p>
+                <p class="stat-box__value" id="weekStatus">✅</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h2>This Month</h2>
+            <div class="stats-grid">
+              <div class="stat-box">
+                <p class="stat-box__label">Total Spent</p>
+                <p class="stat-box__value" id="monthSpent">$0.00</p>
+              </div>
+              <div class="stat-box">
+                <p class="stat-box__label">Total Saved</p>
+                <p class="stat-box__value" id="monthSaved">$0.00</p>
+              </div>
+              <div class="stat-box">
+                <p class="stat-box__label">Additional Savings</p>
+                <p class="stat-box__value" id="monthAdditionalSavings">$0.00</p>
+              </div>
+              <div class="stat-box">
+                <p class="stat-box__label">Target Savings</p>
+                <p class="stat-box__value" id="targetSavings">$225.00</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h2>Budget Breakdown</h2>
+            <div class="breakdown">
+              <div class="breakdown__row">
+                <span>Monthly Fun Money</span>
+                <span class="breakdown__value" id="monthlyBudget">$400.00</span>
+              </div>
+              <div class="breakdown__divider"></div>
+              <div class="breakdown__row">
+                <span>Target Monthly Savings</span>
+                <span class="breakdown__value breakdown__value--positive" id="targetMonthly">-$225.00</span>
+              </div>
+              <div class="breakdown__divider"></div>
+              <div class="breakdown__row">
+                <span>Subscriptions</span>
+                <span class="breakdown__value breakdown__value--negative" id="subTotal">-$0.00</span>
+              </div>
+              <div class="breakdown__divider"></div>
+              <div class="breakdown__row">
+                <span>Available for Spending</span>
+                <span class="breakdown__value" id="availableSpending">$175.00</span>
+              </div>
+              <div class="breakdown__row breakdown__row--indent">
+                <span>Daily Allowance</span>
+                <span class="breakdown__value" id="dailyAllowanceBreakdown">$5.65</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SUBSCRIPTIONS TAB -->
+        <section id="tab-subscriptions" class="tab-pane">
+          <div class="card">
+            <h2>Subscription Manager</h2>
+
+            <div class="summary-box">
+              <p class="summary-box__label">Monthly Subscriptions Total</p>
+              <p class="summary-box__value" id="subMonthlyTotal">$0.00</p>
+              <p class="summary-box__text">Daily impact: <strong id="subDailyImpact">$0.00</strong></p>
+            </div>
+
+            <button class="btn btn--primary" id="toggleSubFormBtn">+ Add Subscription</button>
+
+            <form id="subscriptionForm" class="form hidden">
+              <div class="form__row">
+                <div class="form__group">
+                  <label>Name</label>
+                  <input type="text" id="subName" placeholder="e.g., Netflix" required />
+                </div>
+                <div class="form__group">
+                  <label>Amount ($)</label>
+                  <input type="number" id="subAmount" step="0.01" placeholder="0.00" required />
+                </div>
+              </div>
+              <div class="form__row">
+                <div class="form__group">
+                  <label>Billing Day</label>
+                  <select id="subDay" required>
+                    <option value="1">Day 1</option>
+                    <option value="2">Day 2</option>
+                    <option value="3">Day 3</option>
+                    <option value="4">Day 4</option>
+                    <option value="5">Day 5</option>
+                    <option value="6">Day 6</option>
+                    <option value="7">Day 7</option>
+                    <option value="8">Day 8</option>
+                    <option value="9">Day 9</option>
+                    <option value="10">Day 10</option>
+                    <option value="11">Day 11</option>
+                    <option value="12">Day 12</option>
+                    <option value="13">Day 13</option>
+                    <option value="14">Day 14</option>
+                    <option value="15">Day 15</option>
+                    <option value="16">Day 16</option>
+                    <option value="17">Day 17</option>
+                    <option value="18">Day 18</option>
+                    <option value="19">Day 19</option>
+                    <option value="20">Day 20</option>
+                    <option value="21">Day 21</option>
+                    <option value="22">Day 22</option>
+                    <option value="23">Day 23</option>
+                    <option value="24">Day 24</option>
+                    <option value="25">Day 25</option>
+                    <option value="26">Day 26</option>
+                    <option value="27">Day 27</option>
+                    <option value="28">Day 28</option>
+                    <option value="29">Day 29</option>
+                    <option value="30">Day 30</option>
+                    <option value="31">Day 31</option>
+                  </select>
+                </div>
+                <div class="form__group">
+                  <label>Category</label>
+                  <select id="subCategory" required>
+                    <option>Subscriptions</option>
+                    <option>Entertainment</option>
+                    <option>Other</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form__row">
+                <div class="form__group">
+                  <label>Billing Cycle</label>
+                  <select id="subBillingCycle" required>
+                    <option value="monthly">Monthly</option>
+                    <option value="yearly">Yearly</option>
+                  </select>
+                </div>
+                <div class="form__group" id="billingMonthGroup" style="display: none;">
+                  <label>Billing Month (for yearly)</label>
+                  <select id="subBillingMonth">
+                    <option value="1">January</option>
+                    <option value="2">February</option>
+                    <option value="3">March</option>
+                    <option value="4">April</option>
+                    <option value="5">May</option>
+                    <option value="6">June</option>
+                    <option value="7">July</option>
+                    <option value="8">August</option>
+                    <option value="9">September</option>
+                    <option value="10">October</option>
+                    <option value="11">November</option>
+                    <option value="12">December</option>
+                  </select>
+                </div>
+              </div>
+              <label class="checkbox">
+                <input type="checkbox" id="subActive" checked />
+                <span>Active subscription</span>
+              </label>
+              <button type="submit" class="btn btn--primary">Add Subscription</button>
+            </form>
+
+            <div id="subscriptionsList" class="subscriptions-list">
+              <p class="empty-state">No subscriptions added yet</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- REPORTS TAB -->
+        <section id="tab-reports" class="tab-pane">
+          <div class="card">
+            <h2>Reports</h2>
+
+            <div class="form__row">
+              <div class="form__group">
+                <label>Month</label>
+                <select id="reportMonth"></select>
+              </div>
+              <div class="form__group">
+                <label>Year</label>
+                <select id="reportYear"><option>2026</option></select>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h2>Spending by Category</h2>
+            <div id="monthSubscriptions"></div>
+            <div id="categoryBreakdown" class="category-breakdown">
+              <p class="empty-state">No spending data yet</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <h2>Monthly Summary</h2>
+            <div class="two-col">
+              <div class="stat-card">
+                <p class="stat-card__label">Monthly Average</p>
+                <p class="stat-card__value" id="monthlyAvg">$0.00</p>
+                <p class="stat-card__text" id="monthsOfData">Based on 0 months</p>
+              </div>
+              <div class="stat-card">
+                <p class="stat-card__label">Projected Savings</p>
+                <p class="stat-card__value" id="projectedSavings">$0.00</p>
+                <p class="stat-card__text">Per month</p>
+              </div>
+              <div class="stat-card">
+                <p class="stat-card__label">Avg. Additional Savings</p>
+                <p class="stat-card__value" id="avgAdditionalSavings">$0.00</p>
+                <p class="stat-card__text">Per month</p>
+              </div>
+              <div class="stat-card">
+                <p class="stat-card__label">Total Additional Savings</p>
+                <p class="stat-card__value" id="totalAdditionalSavings">$0.00</p>
+                <p class="stat-card__text">All time</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" id="projectionCard">
+            <h2>🎯 Projected Purchase Date</h2>
+            <div class="projection">
+              <div>
+                <p class="projection__label">At current savings rate</p>
+                <p class="projection__date" id="projectedDate">--</p>
+              </div>
+              <div>
+                <p class="projection__label">Time until purchase</p>
+                <p class="projection__months" id="monthsUntil">--</p>
+              </div>
+            </div>
+            <p class="projection__tip">💡 Adjust your spending to reach your goal faster!</p>
+          </div>
+        </section>
+
+        <!-- ACHIEVEMENTS TAB -->
+        <section id="tab-achievements" class="tab-pane">
+          <div class="card">
+            <h2>Achievement Stats</h2>
+            <div class="achievement-stats">
+              <div class="achievement-stat">
+                <p class="achievement-stat__emoji">🏆</p>
+                <p class="achievement-stat__label">Achievements</p>
+                <p class="achievement-stat__count" id="achievementCount">0/7</p>
+              </div>
+              <div class="achievement-stat">
+                <p class="achievement-stat__emoji">💎</p>
+                <p class="achievement-stat__label">Milestones</p>
+                <p class="achievement-stat__count" id="milestoneCount">0/6</p>
+              </div>
+              <div class="achievement-stat">
+                <p class="achievement-stat__emoji">💰</p>
+                <p class="achievement-stat__label">Total Saved</p>
+                <p class="achievement-stat__count" id="achievementTotal">$0</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h2>Badges</h2>
+            <div id="achievementsList" class="achievements-grid">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+
+          <div class="card">
+            <h2>Saving Milestones</h2>
+            <div id="milestonesList" class="milestones-list">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+        </section>
+
+      </div>
+
+    </div>
+    <div class="container">
+      <div class="card reset-card" style="text-align: center; margin-top: 3rem; padding: 2rem;">
+        <p style="color: #64748b; margin-bottom: 1rem; font-size: 0.875rem;">Need to start fresh?</p>
+        <button id="resetDataBtn" class="btn btn--danger" style="font-weight: bold; padding: 0.75rem 1.5rem; font-size: 1rem;">🔄 RESET ALL DATA</button>
+        <p style="color: #64748b; margin-top: 0.75rem; font-size: 0.75rem;">This will permanently delete all transactions, subscriptions, and progress.</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- ─── Footer ─── -->
+  <footer class="footer">
+    <p>Dream it. Track it. Own it. 🏎️</p>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

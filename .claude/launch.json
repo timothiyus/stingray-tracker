@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "stingray",
+      "runtimeExecutable": "http-server",
+      "runtimeArgs": ["stingray-tracker", "-p", "8000"],
+      "port": 8000,
+      "autoPort": true
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install *)",
+      "Bash(npx tailwindcss *)",
+      "Bash(npm exec *)",
+      "Bash(npm run *)",
+      "mcp__Claude_Preview__preview_start",
+      "mcp__Claude_in_Chrome__tabs_context_mcp",
+      "mcp__Claude_in_Chrome__navigate",
+      "mcp__Claude_in_Chrome__computer",
+      "Bash(curl -s http://localhost:55157)",
+      "mcp__Claude_in_Chrome__read_page",
+      "mcp__Claude_in_Chrome__read_console_messages",
+      "mcp__Claude_in_Chrome__javascript_tool",
+      "mcp__Claude_in_Chrome__find",
+      "mcp__Claude_in_Chrome__tabs_close_mcp",
+      "mcp__Claude_in_Chrome__tabs_create_mcp",
+      "Bash(pkill -f \"python -m http.server\")",
+      "Bash(python -m http.server 8000)",
+      "Read(//tmp/**)",
+      "Bash(netstat -ano)",
+      "Bash(taskkill /PID 78576 /F)",
+      "Bash(taskkill /PID 100548 /F)",
+      "Bash(taskkill /PID 20752 /F)",
+      "Bash(find \"/c/Claude Projects/Money Saver Game\" -name \"*.html\" -type f -exec head -20 {} +)",
+      "Bash(curl -s http://localhost:8000)",
+      "Bash(python -m http.server 9000)",
+      "mcp__Claude_in_Chrome__read_network_requests",
+      "mcp__Claude_in_Chrome__resize_window"
+    ]
+  }
+}
