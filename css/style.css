@@ -979,7 +979,7 @@ a {
 }
 
 /* ─── Responsive ─── */
-@media (max-width: 480px) {
+@media (max-width: 640px) {
   .container {
     padding: 0 0.5rem;
   }
@@ -1280,6 +1280,15 @@ a {
   .btn-group .btn,
   .action-buttons .btn {
     width: 100%;
+  }
+
+  /* Fix stat boxes alignment */
+  .card {
+    display: block;
+  }
+
+  .card .btn--primary {
+    margin-bottom: 0.5rem;
   }
 
   .progress-bar--large {
