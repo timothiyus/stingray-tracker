@@ -979,6 +979,287 @@ a {
 }
 
 /* ─── Responsive ─── */
+@media (max-width: 480px) {
+  .container {
+    padding: 0 0.5rem;
+  }
+
+  .main {
+    padding: 1rem 0;
+  }
+
+  .header {
+    padding: 1rem 0;
+  }
+
+  .header__content {
+    gap: 0.5rem;
+  }
+
+  .header__emoji {
+    font-size: 1.5rem;
+  }
+
+  .header__brand h1 {
+    font-size: 1rem;
+  }
+
+  .header__brand p {
+    font-size: 0.75rem;
+  }
+
+  .tabs {
+    top: 50px;
+  }
+
+  .tabs__btn {
+    padding: 0.5rem 0.5rem;
+    font-size: 0.7rem;
+    flex: 1;
+    text-align: center;
+  }
+
+  .tabs__list {
+    gap: 0.25rem;
+  }
+
+  .hero-card h2 {
+    font-size: 1.375rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .hero-card__subtitle {
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+  }
+
+  .card {
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .card h2 {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+  }
+
+  h2 {
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .journey {
+    padding: 0.75rem;
+    margin-bottom: 1.5rem;
+    gap: 0.25rem;
+  }
+
+  .journey__stage {
+    min-width: 50px;
+    flex: 0 0 auto;
+  }
+
+  .journey__emoji {
+    font-size: 1.5rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .journey__stage p {
+    font-size: 0.7rem;
+  }
+
+  .progress-section__value {
+    font-size: 1.5rem;
+  }
+
+  .progress-section__label {
+    font-size: 0.75rem;
+  }
+
+  .milestone-grid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+    margin: 1.5rem 0;
+  }
+
+  .milestone-card {
+    padding: 1rem;
+  }
+
+  .milestone-card__emoji {
+    font-size: 1.5rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .milestone-card h3 {
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .milestone-card__desc {
+    font-size: 0.75rem;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .stat-box {
+    padding: 0.75rem;
+  }
+
+  .stat-box__label {
+    font-size: 0.7rem;
+  }
+
+  .stat-box__value {
+    font-size: 1rem;
+  }
+
+  .status-banner {
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .status-banner__title {
+    font-size: 1rem;
+  }
+
+  .status-banner__text {
+    font-size: 0.8rem;
+  }
+
+  .two-col {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .stat-card {
+    padding: 1rem;
+  }
+
+  .stat-card__value {
+    font-size: 1.5rem;
+  }
+
+  .form__row {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .form {
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .form__group input,
+  .form__group select {
+    padding: 0.625rem;
+    font-size: 1rem;
+  }
+
+  .btn--primary {
+    padding: 0.625rem;
+    font-size: 0.8rem;
+  }
+
+  .transaction {
+    padding: 0.75rem;
+    gap: 0.5rem;
+  }
+
+  .transaction__amount {
+    font-size: 1rem;
+    margin-right: 0.5rem;
+  }
+
+  .transaction__note {
+    margin-right: 0.5rem;
+    font-size: 0.8rem;
+  }
+
+  .subscription-item {
+    padding: 0.75rem;
+  }
+
+  .achievement-stats {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .achievements-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .achievement-item__content {
+    gap: 0.75rem;
+  }
+
+  .achievement-item__emoji {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+  }
+
+  .milestone-item {
+    padding: 1rem;
+  }
+
+  .milestone-item__left {
+    gap: 0.75rem;
+  }
+
+  .milestone-item__emoji {
+    font-size: 1.5rem;
+  }
+
+  .tip-box {
+    padding: 0.75rem;
+    font-size: 0.8rem;
+  }
+
+  .progress-bar--large {
+    margin: 1rem 0;
+  }
+
+  .summary-box {
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .summary-box__value {
+    font-size: 1.5rem;
+  }
+
+  .breakdown__row {
+    font-size: 0.8rem;
+    padding: 0.5rem 0;
+  }
+
+  .breakdown__row--indent {
+    padding-left: 1rem;
+  }
+
+  .projection {
+    padding: 1rem;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .projection__date,
+  .projection__months {
+    font-size: 1.25rem;
+  }
+
+  .projection__tip {
+    padding: 0.75rem;
+    font-size: 0.8rem;
+  }
+}
+
 @media (max-width: 768px) {
   .container {
     padding: 0 0.75rem;
