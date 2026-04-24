@@ -28,6 +28,7 @@
     <div class="container">
       <div class="tabs__list" id="tabsList">
         <button class="tabs__btn active" data-tab="today">📅 Today</button>
+        <button class="tabs__btn" data-tab="calendar">📆 Calendar</button>
         <button class="tabs__btn" data-tab="stats">📊 Stats</button>
         <button class="tabs__btn" data-tab="subscriptions">🔄 Subscriptions</button>
         <button class="tabs__btn" data-tab="reports">📈 Reports</button>
@@ -235,6 +236,13 @@
             </div>
           </div>
 
+          <!-- MINI CALENDAR -->
+          <div class="card">
+            <h2>This Month</h2>
+            <button class="btn btn--secondary" id="toggleMiniCalendarBtn">📅 Show Calendar</button>
+            <div id="miniCalendarContainer" class="mini-calendar-container hidden"></div>
+          </div>
+
           <!-- WEEKLY TRACKER -->
           <div class="card">
             <h2>This Week</h2>
@@ -258,6 +266,19 @@
                 <span class="progress-bar__text" id="weeklyPercent">0%</span>
               </div>
             </div>
+          </div>
+        </section>
+
+        <!-- CALENDAR TAB -->
+        <section id="tab-calendar" class="tab-pane">
+          <div class="card">
+            <h2>Spending Calendar</h2>
+            <p class="calendar-legend">
+              <span class="legend-item"><span class="legend-color green"></span> No Spending</span>
+              <span class="legend-item"><span class="legend-color orange"></span> Some Spending</span>
+              <span class="legend-item"><span class="legend-color red"></span> Over Budget</span>
+            </p>
+            <div id="calendarContainer" class="calendar-container"></div>
           </div>
         </section>
 

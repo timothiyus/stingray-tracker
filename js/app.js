@@ -29,6 +29,7 @@ let appData = {
   config: CONFIG,
   transactions: [],
   subscriptions: [],
+  noSpendingDays: [],
   xpData: {
     totalXP: 0,
     level: 1,
@@ -64,6 +65,11 @@ function loadData() {
       unlockedDates: {},
       resetDate: null,
     };
+  }
+
+  // Ensure noSpendingDays exists (for backward compatibility)
+  if (!appData.noSpendingDays) {
+    appData.noSpendingDays = [];
   }
 
   // Ensure subscriptions have billingMonth for yearly subs (for backward compatibility)
@@ -336,7 +342,9 @@ document.addEventListener('DOMContentLoaded', () => {
   setupTabNavigation();
   setupFormHandlers();
   setupMonthDropdowns();
+  setupCalendarHandlers();
   updateUI();
+  renderCalendars();
 });
 
 function setupTabNavigation() {
@@ -584,6 +592,7 @@ function updateUI() {
   updateSubscriptions();
   updateReports();
   updateAchievements();
+  renderCalendars();
 }
 
 function updateHero() {
@@ -1015,4 +1024,121 @@ function deleteTransaction(id) {
 function deleteSubscription(id) {
   appData.subscriptions = appData.subscriptions.filter(sub => sub.id !== id);
   saveData();
+}
+
+// ─── Calendar Functions ─── //
+function getSpendingForDate(dateStr) {
+  const spent = appData.transactions
+    .filter(tx => tx.date === dateStr)
+    .reduce((sum, tx) => sum + tx.amount, 0);
+  return spent;
+}
+
+function getDayStatus(dateStr) {
+  if (appData.noSpendingDays.includes(dateStr)) {
+    return 'no-spending';
+  }
+  const spent = getSpendingForDate(dateStr);
+  const dailyAllowance = getDailyAllowance();
+  if (spent === 0) {
+    return 'no-data';
+  } else if (spent <= dailyAllowance) {
+    return 'under-budget';
+  } else {
+    return 'over-budget';
+  }
+}
+
+function toggleNoSpendingDay(dateStr) {
+  const idx = appData.noSpendingDays.indexOf(dateStr);
+  if (idx > -1) {
+    appData.noSpendingDays.splice(idx, 1);
+  } else {
+    appData.noSpendingDays.push(dateStr);
+  }
+  saveData();
+}
+
+function renderCalendar(year, month) {
+  const firstDay = new Date(year, month, 1);
+  const lastDay = new Date(year, month + 1, 0);
+  const startDate = new Date(firstDay);
+  startDate.setDate(startDate.getDate() - firstDay.getDay());
+
+  const monthName = new Date(year, month).toLocaleString('default', { month: 'long', year: 'numeric' });
+  let html = `<h3>${monthName}</h3><div class="calendar-grid">`;
+
+  // Weekday headers
+  const weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  html += '<div class="calendar-header">';
+  weekDays.forEach(day => {
+    html += `<div class="calendar-weekday">${day}</div>`;
+  });
+  html += '</div>';
+
+  // Days
+  const today = getTodayDate();
+  for (let i = 0; i < 42; i++) {
+    const date = new Date(startDate);
+    date.setDate(date.getDate() + i);
+    const dateStr = date.toISOString().split('T')[0];
+    const isCurrentMonth = date.getMonth() === month;
+    const isToday = dateStr === today;
+
+    if (!isCurrentMonth) {
+      html += '<div class="calendar-day other-month"></div>';
+      continue;
+    }
+
+    const status = getDayStatus(dateStr);
+    const spent = getSpendingForDate(dateStr);
+    const isMarked = appData.noSpendingDays.includes(dateStr);
+
+    let statusClass = status;
+    if (isMarked) statusClass = 'no-spending';
+
+    html += `<div class="calendar-day ${statusClass} ${isToday ? 'today' : ''}" onclick="toggleNoSpendingDay('${dateStr}'); renderCalendars();" title="${dateStr}">
+      <div class="calendar-day-num">${date.getDate()}</div>`;
+    if (isMarked) {
+      html += '<div class="calendar-day-mark">✓</div>';
+    } else if (spent > 0) {
+      html += `<div class="calendar-day-amount">$${spent.toFixed(0)}</div>`;
+    }
+    html += '</div>';
+  }
+
+  html += '</div>';
+  return html;
+}
+
+function renderCalendars() {
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = now.getMonth();
+
+  // Full calendar
+  const calendarEl = document.getElementById('calendarContainer');
+  if (calendarEl) {
+    calendarEl.innerHTML = renderCalendar(year, month);
+  }
+
+  // Mini calendar
+  const miniCalendarEl = document.getElementById('miniCalendarContainer');
+  if (miniCalendarEl) {
+    miniCalendarEl.innerHTML = renderCalendar(year, month);
+  }
+
+  updateUI();
+}
+
+function setupCalendarHandlers() {
+  const toggleBtn = document.getElementById('toggleMiniCalendarBtn');
+  const miniCal = document.getElementById('miniCalendarContainer');
+
+  if (toggleBtn && miniCal) {
+    toggleBtn.addEventListener('click', () => {
+      miniCal.classList.toggle('hidden');
+      toggleBtn.textContent = miniCal.classList.contains('hidden') ? '📅 Show Calendar' : '📅 Hide Calendar';
+    });
+  }
 }
